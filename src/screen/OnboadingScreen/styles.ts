@@ -29,8 +29,9 @@ export const InfoOnboading = styled.View`
 `;
 
 export const AccountContainer = styled.View`
-  margin-top: 80px;
-  padding: 10px 10px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding: 0px 30px;
   width: 100%;
   flex-direction: row;
   align-items: center;

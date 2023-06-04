@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { StyleSheet } from 'react-native';
 import { Button } from '../../components/Button';
 import { Text } from '../../components/Text';
@@ -10,9 +12,17 @@ import {
   AccountItem
 } from './styles';
 
+interface OnboadingScreenProps {
+  navigation: {
+    navigate: (screenName: string) => void;
+  }
+}
+
 import Swiper from 'react-native-swiper';
 
-const OnboadingScreen = () => {
+const OnboadingScreen: FC<OnboadingScreenProps> = ({
+  navigation
+}) => {
   return (
     <Container>
       <Swiper
@@ -104,7 +114,7 @@ const OnboadingScreen = () => {
         </AccountItem>
 
         <AccountItem>
-          <Button onPress={() => alert('login')}>
+          <Button onPress={() => navigation.navigate('LoginScreen')}>
             <Text color='#FFF'>LOGIN</Text>
           </Button>
         </AccountItem>
