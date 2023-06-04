@@ -16,6 +16,7 @@ export const OnboadingContainer = styled.View`
   align-items: center;
   justify-content: center;
   gap: 50px;
+  margin-top: 32px;
 `;
 
 export const Image = styled.Image``;
@@ -24,5 +25,20 @@ export const InfoOnboading = styled.View`
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin: 0px 50px 0px;
+  padding: 0px 25px;
+`;
+
+export const AccountContainer = styled.View`
+  margin-top: 80px;
+  padding: 10px 10px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+`;
+
+export const AccountItem = styled.View`
+  align-items: center;
+  justify-content: center;
 `;
