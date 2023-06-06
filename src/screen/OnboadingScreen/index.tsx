@@ -1,4 +1,7 @@
-import { FC } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../main/Main';
+import Swiper from 'react-native-swiper';
 
 import { StyleSheet } from 'react-native';
 import { Button } from '../../components/Button';
@@ -12,17 +15,11 @@ import {
   AccountItem
 } from './styles';
 
-interface OnboadingScreenProps {
-  navigation: {
-    navigate: (screenName: string) => void;
-  }
-}
+type OnboadingScreenProps = StackNavigationProp<RootStackParamList>
 
-import Swiper from 'react-native-swiper';
+const OnboadingScreen = () => {
+  const navigation = useNavigation<OnboadingScreenProps>();
 
-const OnboadingScreen: FC<OnboadingScreenProps> = ({
-  navigation
-}) => {
   return (
     <Container>
       <Swiper
@@ -107,7 +104,7 @@ const OnboadingScreen: FC<OnboadingScreenProps> = ({
         <AccountItem>
           <Button
             isOutlined
-            onPress={() => alert('register')}
+            onPress={() => navigation.navigate('RegisterScreen')}
           >
             <Text color='#FFF'>CREATE ACCOUNT</Text>
           </Button>
