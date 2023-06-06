@@ -1,4 +1,6 @@
-import { FC } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../main/Main';
 
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
@@ -16,16 +18,11 @@ import {
   RegisterLink
 } from './styles';
 
-interface RegisterScreenProps {
-  navigation: {
-    goBack: () => void;
-    navigate: (screenName: string) => void;
-  }
-}
+type RegisterScreenProps = StackNavigationProp<RootStackParamList>
 
-const RegisterScreen: FC<RegisterScreenProps> = ({
-  navigation
-}) => {
+const RegisterScreen = () => {
+  const navigation = useNavigation<RegisterScreenProps>();
+
   return (
     <Container>
       <BackButton
@@ -77,7 +74,7 @@ const RegisterScreen: FC<RegisterScreenProps> = ({
         onPress={() => alert('oi')}
       >
         <Text color='#FFF'>
-          Login
+          Register
         </Text>
       </Button>
 
