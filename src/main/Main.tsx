@@ -4,9 +4,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import OnboadingScreen from '../screen/OnboadingScreen';
 import LoginScreen from '../screen/LoginScreen';
 import RegisterScreen from '../screen/RegisterScreen';
-import SecondScreen from '../screen/SecondScreen/SecondScreen copy';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  OnboadingScreen: undefined;
+  LoginScreen: undefined;
+  RegisterScreen: undefined;
+}
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const Main = () => {
   return (
@@ -26,10 +31,6 @@ const Main = () => {
         <Stack.Screen
           name='RegisterScreen'
           component={RegisterScreen}
-        />
-        <Stack.Screen
-          name='SecondScreen'
-          component={SecondScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
