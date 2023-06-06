@@ -1,4 +1,6 @@
-import { FC } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../main/Main';
 
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
@@ -16,16 +18,11 @@ import {
   RegisterLink
 } from './styles';
 
-interface LoginScreenProps {
-  navigation: {
-    goBack: () => void;
-    navigate: (screenName: string) => void;
-  }
-}
+type LoginScreenProps = StackNavigationProp<RootStackParamList>
 
-const LoginScreen: FC<LoginScreenProps> = ({
-  navigation
-}) => {
+const LoginScreen = () => {
+  const navigation = useNavigation<LoginScreenProps>();
+
   return (
     <Container>
       <BackButton
