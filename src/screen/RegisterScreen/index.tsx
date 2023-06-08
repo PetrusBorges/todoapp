@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../main/Main';
@@ -21,6 +22,8 @@ import {
 type RegisterScreenProps = StackNavigationProp<RootStackParamList>
 
 const RegisterScreen = () => {
+  const [loginFail, setLoginFail] = useState<boolean>(false);
+
   const navigation = useNavigation<RegisterScreenProps>();
 
   return (
@@ -68,7 +71,13 @@ const RegisterScreen = () => {
             secureTextEntry
           />
         </Credentials>
+        {loginFail && (
+          <Text color='#fc1616'>
+          Email or password invalid!
+          </Text>
+        )}
       </CredentialsContainer>
+
 
       <Button
         onPress={() => alert('oi')}
