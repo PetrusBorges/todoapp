@@ -87,7 +87,7 @@ const LoginScreen = () => {
           <Text color='#FFF'>Username</Text>
           <Input
             value={email}
-            onChangeText={(value) => setEmail(value)}
+            onChangeText={(value: string) => setEmail(value)}
             placeholder="Enter your username"
             placeholderTextColor='#979797'
           />
@@ -97,7 +97,7 @@ const LoginScreen = () => {
           <Text color='#FFF'>Password</Text>
           <Input
             value={password}
-            onChangeText={(value) => setPassword(value)}
+            onChangeText={(value: string) => setPassword(value)}
             placeholder="Enter your password"
             placeholderTextColor='#979797'
             secureTextEntry
