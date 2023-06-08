@@ -1,8 +1,12 @@
 import useAuth from '../../hooks/useAuth';
 
 import { Text } from '../../components/Text';
-import { Container } from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Footer } from '../../components/Footer';
+import {
+  Container,
+  Header,
+  IconView
+} from './styles';
 
 const HomeScreen = () => {
   const { user, logout } = useAuth();
@@ -13,10 +17,26 @@ const HomeScreen = () => {
 
   return (
     <Container>
-      <Text color='#FFF' >{user.email}</Text>
-      <TouchableOpacity onPress={logout}>
-        <Text color='#FFF' >sair</Text>
-      </TouchableOpacity>
+      <Header>
+        <Text
+          color="#FFFFFF"
+          size={28}
+          weight='700'>
+          Home
+        </Text>
+
+        <IconView>
+          <Text
+            color='#FFFFFF'
+            size={26}
+            weight='700'
+          >
+            {user.email.toUpperCase().charAt(0)}
+          </Text>
+        </IconView>
+      </Header>
+
+      <Footer />
     </Container>
   );
 };
