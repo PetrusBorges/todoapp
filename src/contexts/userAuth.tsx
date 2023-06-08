@@ -138,7 +138,7 @@ const AuthProvider: FC<AuthProviderProps> = ({
       }
 
       if (response) {
-        navigation.navigate('ResetPassword');
+        navigation.navigate('ResetPasswordScreen');
         setToken(response.data.token);
         await applyToken();
       }
