@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { ActivityIndicator } from 'react-native';
+
 import { Container } from './styles';
 
 interface ButtonProps {
@@ -6,13 +8,15 @@ interface ButtonProps {
   isOutlined?: boolean;
   disabled?: boolean;
   onPress: () => void;
+  isLoading?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
   children,
   isOutlined,
   disabled,
-  onPress
+  onPress,
+  isLoading
 }) => {
   return (
     <Container
@@ -20,7 +24,11 @@ export const Button: FC<ButtonProps> = ({
       isOutlined={isOutlined}
       disabled={disabled}
     >
-      {children}
+      {isLoading ? (
+        <ActivityIndicator size='small' color='#FFFFFF' />
+      ) : (
+        children
+      )}
     </Container>
   );
 };
