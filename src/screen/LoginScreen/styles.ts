@@ -24,8 +24,8 @@ export const CredentialsContainer = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
-  gap: 25px;
-  margin-bottom: 70px;
+  gap: 8px;
+  margin-bottom: 60px;
 `;
 
 export const Credentials = styled.View`

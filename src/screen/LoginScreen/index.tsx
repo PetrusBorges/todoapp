@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../main/Main';
+
+import useAuth from '../../hooks/useAuth';
 
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
@@ -21,7 +24,38 @@ import {
 type LoginScreenProps = StackNavigationProp<RootStackParamList>
 
 const LoginScreen = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loginFail, setLoginFail] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
   const navigation = useNavigation<LoginScreenProps>();
+
+  const { signIn } = useAuth();
+
+  const handleLogin = async () => {
+    try {
+      setIsLoading(true);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const credentials = {
+        email,
+        password
+      };
+
+      await signIn(credentials);
+    } catch (error) {
+      console.log(error);
+      setLoginFail(true);
+    } finally {
+      setIsLoading(false);
+
+      setTimeout(() => {
+        setLoginFail(false);
+      }, 3000);
+    }
+  };
 
   return (
     <Container>
@@ -46,6 +80,8 @@ const LoginScreen = () => {
         <Credentials>
           <Text color='#FFF'>Username</Text>
           <Input
+            value={email}
+            onChangeText={(value) => setEmail(value)}
             placeholder="Enter your username"
             placeholderTextColor='#979797'
           />
@@ -54,15 +90,25 @@ const LoginScreen = () => {
         <Credentials>
           <Text color='#FFF'>Password</Text>
           <Input
+            value={password}
+            onChangeText={(value) => setPassword(value)}
             placeholder="Enter your password"
             placeholderTextColor='#979797'
             secureTextEntry
           />
         </Credentials>
+        {loginFail && (
+          <Text color='#fc1616'>
+          Email or password invalid!
+          </Text>
+        )}
       </CredentialsContainer>
 
+
       <Button
-        onPress={() => alert('oi')}
+        disabled={isLoading}
+        isLoading={isLoading}
+        onPress={handleLogin}
       >
         <Text color='#FFF'>
           Login
