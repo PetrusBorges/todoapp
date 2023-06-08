@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackParamList } from '../main/Main';
 
 import HomeScreen from '../screen/HomeScreen';
-import ResetPassword from '../screen/ResetPassword';
+import ResetPasswordScreen from '../screen/ResetPasswordScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -18,8 +18,8 @@ const AuthenticatedStack = () => {
         component={HomeScreen}
       />
       <Stack.Screen
-        name='ResetPassword'
-        component={ResetPassword}
+        name='ResetPasswordScreen'
+        component={ResetPasswordScreen}
       />
     </Stack.Navigator>
   );

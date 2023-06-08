@@ -1,7 +1,7 @@
 import { Text } from '../../components/Text';
 import { Container } from './styles';
 
-const ResetPassword = () => {
+const ResetPasswordScreen = () => {
   return (
     <Container>
       <Text>reset</Text>
@@ -9,4 +9,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordScreen;

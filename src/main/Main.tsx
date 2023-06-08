@@ -9,7 +9,7 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
   HomeScreen: undefined;
-  ResetPassword: undefined;
+  ResetPasswordScreen: undefined;
 }
 
 const Main = () => {
