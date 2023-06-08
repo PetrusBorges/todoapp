@@ -7,9 +7,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const HomeScreen = () => {
   const { user, logout } = useAuth();
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <Container>
-      <Text color='#FFF' >{user?.email}</Text>
+      <Text color='#FFF' >{user.email}</Text>
       <TouchableOpacity onPress={logout}>
         <Text color='#FFF' >sair</Text>
       </TouchableOpacity>
