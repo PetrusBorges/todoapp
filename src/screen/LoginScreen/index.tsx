@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../main/Main';
@@ -33,7 +33,11 @@ const LoginScreen = () => {
 
   const { signIn } = useAuth();
 
-  const handleLogin = async () => {
+  const isInputsEmpty = useMemo(() => {
+    return email.length === 0 || password.length <= 7;
+  }, [email, password]);
+
+  const handleLogin = useCallback(async () => {
     try {
       setIsLoading(true);
 
@@ -50,12 +54,14 @@ const LoginScreen = () => {
       setLoginFail(true);
     } finally {
       setIsLoading(false);
+      setEmail('');
+      setPassword('');
 
       setTimeout(() => {
         setLoginFail(false);
       }, 3000);
     }
-  };
+  }, [email, password]);
 
   return (
     <Container>
@@ -95,6 +101,7 @@ const LoginScreen = () => {
             placeholder="Enter your password"
             placeholderTextColor='#979797'
             secureTextEntry
+            maxLength={8}
           />
         </Credentials>
         {loginFail && (
@@ -106,7 +113,7 @@ const LoginScreen = () => {
 
 
       <Button
-        disabled={isLoading}
+        disabled={isLoading || isInputsEmpty}
         isLoading={isLoading}
         onPress={handleLogin}
       >
