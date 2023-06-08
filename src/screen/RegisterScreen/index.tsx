@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../main/Main';
+
+import { api } from '../../services/api';
 
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
@@ -22,9 +24,50 @@ import {
 type RegisterScreenProps = StackNavigationProp<RootStackParamList>
 
 const RegisterScreen = () => {
-  const [loginFail, setLoginFail] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [registerFail, setRegisterFail] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const navigation = useNavigation<RegisterScreenProps>();
+
+  const isPasswordsEqual = useMemo(() => {
+    return password.toLowerCase() === confirmPassword.toLowerCase();
+  }, [password, confirmPassword]);
+
+  const isPasswordsEmpty = useMemo(() => {
+    return password.length <= 7 && confirmPassword.length <= 7;
+  }, [password, confirmPassword]);
+
+  const handleRegister = useCallback(async () => {
+    try {
+      setIsLoading(true);
+
+      const credentials = {
+        email,
+        password,
+        confirmPassword
+      };
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await api.post('/users', credentials);
+
+      navigation.navigate('LoginScreen');
+    } catch (error) {
+      console.log(error);
+      setRegisterFail(true);
+    } finally {
+      setIsLoading(false);
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+
+      setTimeout(() => {
+        setRegisterFail(false);
+      }, 3000);
+    }
+  }, [email, password, confirmPassword]);
 
   return (
     <Container>
@@ -49,6 +92,8 @@ const RegisterScreen = () => {
         <Credentials>
           <Text color='#FFF'>Username</Text>
           <Input
+            value={email}
+            onChangeText={(value) => setEmail(value)}
             placeholder="Enter your username"
             placeholderTextColor='#979797'
           />
@@ -57,30 +102,45 @@ const RegisterScreen = () => {
         <Credentials>
           <Text color='#FFF'>Password</Text>
           <Input
+            value={password}
+            onChangeText={(value) => setPassword(value)}
             placeholder="Enter your password"
             placeholderTextColor='#979797'
             secureTextEntry
+            maxLength={8}
           />
         </Credentials>
 
         <Credentials>
-          <Text color='#FFF'>Password</Text>
+          <Text color='#FFF'>Confirm Password</Text>
           <Input
+            value={confirmPassword}
+            onChangeText={(value) => setConfirmPassword(value)}
             placeholder="Confirm your password"
             placeholderTextColor='#979797'
             secureTextEntry
+            maxLength={8}
           />
         </Credentials>
-        {loginFail && (
+
+        {registerFail && (
           <Text color='#fc1616'>
-          Email or password invalid!
+            Email or password invalid!
+          </Text>
+        )}
+
+        {!isPasswordsEqual && (
+          <Text color='#fc1616'>
+            Your passwords do not match!
           </Text>
         )}
       </CredentialsContainer>
 
 
       <Button
-        onPress={() => alert('oi')}
+        disabled={isLoading || !isPasswordsEqual || isPasswordsEmpty}
+        isLoading={isLoading}
+        onPress={handleRegister}
       >
         <Text color='#FFF'>
           Register
