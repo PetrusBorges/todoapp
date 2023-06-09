@@ -5,7 +5,12 @@ import { Footer } from '../../components/Footer';
 import {
   Container,
   Header,
-  IconView
+  IconView,
+  SearchContainer,
+  Image,
+  Input,
+  TasksContainer,
+  ButtonTaskHeader
 } from './styles';
 
 const HomeScreen = () => {
@@ -21,7 +26,8 @@ const HomeScreen = () => {
         <Text
           color="#FFFFFF"
           size={28}
-          weight='700'>
+          weight='700'
+        >
           Home
         </Text>
 
@@ -35,6 +41,44 @@ const HomeScreen = () => {
           </Text>
         </IconView>
       </Header>
+
+      <SearchContainer>
+        <Image
+          source={require('../../assets/icons/searchIcon.png')}
+        />
+        <Input
+          placeholder="Search for your task..."
+          placeholderTextColor='#979797'
+        />
+      </SearchContainer>
+
+      <TasksContainer>
+        <ButtonTaskHeader>
+          <Text
+            color="#FFFFFF"
+            size={14}
+            weight='400'
+          >
+            Today
+          </Text>
+          <Image
+            source={require('../../assets/icons/arrowDownIcon.png')}
+          />
+        </ButtonTaskHeader>
+
+        <ButtonTaskHeader>
+          <Text
+            color="#FFFFFF"
+            size={14}
+            weight='400'
+          >
+            Completed
+          </Text>
+          <Image
+            source={require('../../assets/icons/arrowDownIcon.png')}
+          />
+        </ButtonTaskHeader>
+      </TasksContainer>
 
       <Footer />
     </Container>
