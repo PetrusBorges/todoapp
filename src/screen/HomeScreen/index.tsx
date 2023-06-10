@@ -25,7 +25,7 @@ const HomeScreen = () => {
     {
       isCompleted: false,
       title: 'aaaaaa',
-      category: 'Home',
+      category: 'Study',
       dificult: 1
     },
     {
