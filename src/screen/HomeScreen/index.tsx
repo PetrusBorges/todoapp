@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 
+import { TaskCard } from '../../components/TaskCard';
 import { Text } from '../../components/Text';
 import { Footer } from '../../components/Footer';
 import { Platform, FlatList, View, ActivityIndicator } from 'react-native';
@@ -13,12 +14,6 @@ import {
   Input,
   TasksContainer,
   ButtonTaskHeader,
-  TaskCard,
-  ButtonTaskComplete,
-  TaskCardInfo,
-  TaskDetailsContainer,
-  TaskCategoryCard,
-  TaskDificultCard,
   Separator
 } from './styles';
 
@@ -148,7 +143,7 @@ const HomeScreen = () => {
               <>
                 <ButtonTaskHeader>
                   <Text color="#FFFFFF"size={14}weight='400'>
-                    {filteredTask.length} - Today
+                    {filteredTask.length} - Todo
                   </Text>
                   <Image
                     source={require('../../assets/icons/arrowDownIcon.png')}
@@ -163,104 +158,9 @@ const HomeScreen = () => {
                   data={filteredTask}
                   keyExtractor={task => task.title}
                   renderItem={({ item: task }) => (
-                    <TaskCard>
-                      <ButtonTaskComplete
-                        isCompleted={task.isCompleted}
-                      />
-
-                      <TaskCardInfo>
-                        <Text
-                          color="#FFFFFF"
-                        >
-                          {task.title}
-                        </Text>
-
-                        <TaskDetailsContainer>
-                          <TaskCategoryCard>
-                            <Image
-                              style={{ height: 20, width: 20 }}
-                              resizeMode='contain'
-                              source={require('../../assets/icons/universityIcon.png')}
-                            />
-
-                            <Text color="#FFFFFF">
-                              {task.category}
-                            </Text>
-                          </TaskCategoryCard>
-
-                          <TaskDificultCard>
-                            <Image
-                              style={{ height: 20, width: 20 }}
-                              resizeMode='contain'
-                              source={require('../../assets/icons/dificultIcon.png')}
-                            />
-
-                            <Text color="#FFFFFF">
-                              {task.dificult}
-                            </Text>
-                          </TaskDificultCard>
-                        </TaskDetailsContainer>
-                      </TaskCardInfo>
-                    </TaskCard>
-                  )}
-                />
-
-                <ButtonTaskHeader>
-                  <Text color="#FFFFFF" size={14} weight='400' >
-                    {tasks.length} - Completed
-                  </Text>
-                  <Image
-                    source={require('../../assets/icons/arrowDownIcon.png')}
-                  />
-                </ButtonTaskHeader>
-
-                <FlatList
-                  ItemSeparatorComponent={() => <Separator/>}
-                  contentContainerStyle={{ paddingVertical: 5 }}
-                  style={{ marginVertical: 10, maxHeight: 170 }}
-                  showsVerticalScrollIndicator={false}
-                  data={tasks}
-                  keyExtractor={task => task.title}
-                  renderItem={({ item: task }) => (
-                    <TaskCard>
-                      <ButtonTaskComplete
-                        isCompleted={task.isCompleted}
-                      />
-
-                      <TaskCardInfo>
-                        <Text
-                          color="#FFFFFF"
-                        >
-                          {task.title}
-                        </Text>
-
-                        <TaskDetailsContainer>
-                          <TaskCategoryCard>
-                            <Image
-                              style={{ height: 20, width: 20 }}
-                              resizeMode='contain'
-                              source={require('../../assets/icons/universityIcon.png')}
-                            />
-
-                            <Text color="#FFFFFF">
-                              {task.category}
-                            </Text>
-                          </TaskCategoryCard>
-
-                          <TaskDificultCard>
-                            <Image
-                              style={{ height: 20, width: 20 }}
-                              resizeMode='contain'
-                              source={require('../../assets/icons/dificultIcon.png')}
-                            />
-
-                            <Text color="#FFFFFF">
-                              {task.dificult}
-                            </Text>
-                          </TaskDificultCard>
-                        </TaskDetailsContainer>
-                      </TaskCardInfo>
-                    </TaskCard>
+                    <TaskCard
+                      task={task}
+                    />
                   )}
                 />
               </>
