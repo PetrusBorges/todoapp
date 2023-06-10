@@ -4,6 +4,23 @@ interface ButtonTaskCompleteProps {
   isCompleted: boolean;
 }
 
+interface CategoryCardProps {
+  category: keyof typeof categoryColors;
+}
+
+const categoryColors = {
+  Grocery: '#CCFF80',
+  Work: '#FF9680',
+  Design: '#80FFFF',
+  Health: '#80FFA3',
+  Home: '#FF8080',
+  Social: '#FF80EB',
+  Music: '#FC80FF',
+  Sport: '#80FFFF',
+  Study: '#809CFF',
+  Movie: '#80D1FF',
+};
+
 export const Container = styled.TouchableOpacity`
   width: 100%;
   height: 80px;
@@ -40,14 +57,14 @@ export const TaskDetailsContainer = styled.View`
   gap: 12px;
 `;
 
-export const TaskCategoryCard = styled.View`
+export const TaskCategoryCard = styled.View<CategoryCardProps>`
   padding: 4px 8px;
   border-radius: 4px;
-  background-color: #809CFF;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 5px;
+  background-color: ${({ category }) => categoryColors[category] || '#000000'};
 `;
 
 export const Image = styled.Image``;
