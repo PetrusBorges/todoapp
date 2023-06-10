@@ -10,7 +10,11 @@ import {
   Button,
   Image,
   DetailsTask,
-  AlignDetails
+  AlignDetails,
+  CategoryContainer,
+  CategoryCard,
+  DificultContainer,
+  DificultCard
 } from './styles';
 
 interface CreateTaskModalProps {
@@ -26,6 +30,8 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
   const [dificultView, setDificultView] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [taskTitle, setTaskTitle] = useState<string>('');
+  const [categoryValue, setCategoryValue] = useState<string>('');
+  const [dificultValue, setDificultValue] = useState<string>('');
 
   const toggleCategory = useCallback(() => {
     if(dificultView) {
@@ -47,13 +53,27 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
     try {
       setIsLoading(true);
       await new Promise(resolve => setTimeout(resolve, 3000));
-      alert(JSON.stringify(taskTitle));
+
+      const credentials = {
+        taskTitle,
+        categoryValue,
+        dificultValue
+      };
+
+      alert(JSON.stringify(credentials));
+
+      onClose();
     } catch (error) {
       console.log(error);
     } finally {
+      setTaskTitle('');
+      setCategoryValue('');
+      setDificultValue('');
       setIsLoading(false);
+      setCategoryView(false);
+      setDificultView(false);
     }
-  }, [taskTitle]);
+  }, [taskTitle, categoryValue, dificultValue]);
 
   return (
     <Modal
@@ -87,11 +107,201 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
           )}
 
           {categoryView && (
-            <Text color="#FFFFFF">category</Text>
+            <CategoryContainer>
+              <CategoryCard
+                Grocery
+                onPress={() => setCategoryValue('Grocery')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/breadIcon.png')}
+                />
+                <Text color='#010101'>Grocery</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Work
+                onPress={() => setCategoryValue('Work')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/briefcaseIcon.png')}
+                />
+                <Text color='#010101'>Work</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Design
+                onPress={() => setCategoryValue('Design')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/designIcon.png')}
+                />
+                <Text color='#010101'>Design</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Health
+                onPress={() => setCategoryValue('Health')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/heartbeatIcon.png')}
+                />
+                <Text color='#010101'>Health</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Home
+                onPress={() => setCategoryValue('Home')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/homeIcon.png')}
+                />
+                <Text color='#010101'>Home</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Social
+                onPress={() => setCategoryValue('Social')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/megaphoneIcon.png')}
+                />
+                <Text color='#010101'>Social</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Music
+                onPress={() => setCategoryValue('Music')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/musicIcon.png')}
+                />
+                <Text color='#010101'>Music</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Sport
+                onPress={() => setCategoryValue('Sport')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/sportIcon.png')}
+                />
+                <Text color='#010101'>Sport</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Study
+                onPress={() => setCategoryValue('Study')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/universityIcon.png')}
+                />
+                <Text color='#010101'>Study</Text>
+              </CategoryCard>
+
+              <CategoryCard
+                Movie
+                onPress={() => setCategoryValue('Movie')}
+              >
+                <Image
+                  source={require('../../assets/icons/category/videoCameraIcon.png')}
+                />
+                <Text color='#010101'>Movie</Text>
+              </CategoryCard>
+            </CategoryContainer>
           )}
 
           {dificultView && (
-            <Text color="#FFFFFF">dificult</Text>
+            <DificultContainer>
+              <DificultCard
+                onPress={() => setDificultValue('1')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">1</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('2')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">2</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('3')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">3</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('4')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">4</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('5')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">5</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('6')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">6</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('7')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">7</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('8')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">8</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('9')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">9</Text>
+              </DificultCard>
+
+              <DificultCard
+                onPress={() => setDificultValue('10')}
+              >
+                <Image
+                  source={require('../../assets/icons/dificultIcon.png')}
+                />
+                <Text color="#FFFFFF">10</Text>
+              </DificultCard>
+            </DificultContainer>
           )}
 
           <DetailsTask>
@@ -107,6 +317,7 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
 
               <Button
                 onPress={toggleDificult}
+                disabled={taskTitle.length <= 0 || categoryValue.length <= 0}
               >
                 <Image
                   source={require('../../assets/icons/dificultIcon.png')}
@@ -115,8 +326,8 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
             </AlignDetails>
 
             <Button
-              disabled
               onPress={submitCreateTask}
+              disabled={taskTitle.length <= 0 || categoryValue.length <= 0 || dificultValue.length <= 0}
             >
               {isLoading && (
                 <ActivityIndicator
