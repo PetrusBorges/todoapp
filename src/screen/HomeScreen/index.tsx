@@ -1,7 +1,9 @@
+import { useMemo, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 
 import { Text } from '../../components/Text';
 import { Footer } from '../../components/Footer';
+import { Platform, FlatList, View, ActivityIndicator } from 'react-native';
 import {
   Container,
   Header,
@@ -10,18 +12,76 @@ import {
   Image,
   Input,
   TasksContainer,
-  ButtonTaskHeader
+  ButtonTaskHeader,
+  TaskCard,
+  ButtonTaskComplete,
+  TaskCardInfo,
+  TaskDetailsContainer,
+  TaskCategoryCard,
+  TaskDificultCard,
+  Separator
 } from './styles';
 
+import { Task } from '../../@types/Task';
+
 const HomeScreen = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [tasks, setTasks] = useState<Task[]>([
+    {
+      isCompleted: false,
+      title: 'aaaaaa',
+      category: 'Home',
+      dificult: 1
+    },
+    {
+      isCompleted: true,
+      title: 'bbbbbbb',
+      category: 'Home',
+      dificult: 2
+    },
+    {
+      isCompleted: true,
+      title: 'asdasd',
+      category: 'Home',
+      dificult: 2
+    },
+    {
+      isCompleted: true,
+      title: 'ssdsdsd',
+      category: 'Home',
+      dificult: 2
+    },
+    {
+      isCompleted: true,
+      title: 'xcxcxcx',
+      category: 'Home',
+      dificult: 2
+    },
+    {
+      isCompleted: true,
+      title: 'xxcxcxxxcxcxcx',
+      category: 'Home',
+      dificult: 2
+    }
+  ]);
+  const [searchTask, setSearchTask] = useState<string>('');
+
   const { user, logout } = useAuth();
 
   if (!user) {
     return null;
   }
 
+  const filteredTask = useMemo(() => {
+    return tasks.filter((task) => (
+      task.title.toLowerCase().includes(searchTask.toLowerCase())
+    ));
+  }, [tasks, searchTask]);
+
   return (
-    <Container>
+    <Container
+      behavior={Platform.OS === 'android' ? 'height' : 'padding'}
+    >
       <Header>
         <Text
           color="#FFFFFF"
@@ -47,37 +107,166 @@ const HomeScreen = () => {
           source={require('../../assets/icons/searchIcon.png')}
         />
         <Input
+          value={searchTask}
+          onChangeText={(value: string) => setSearchTask(value)}
           placeholder="Search for your task..."
           placeholderTextColor='#979797'
         />
       </SearchContainer>
 
       <TasksContainer>
-        <ButtonTaskHeader>
-          <Text
-            color="#FFFFFF"
-            size={14}
-            weight='400'
+        {isLoading ? (
+          <View
+            style={{ flex: 1 ,alignItems: 'center', justifyContent: 'center' }}
           >
-            Today
-          </Text>
-          <Image
-            source={require('../../assets/icons/arrowDownIcon.png')}
-          />
-        </ButtonTaskHeader>
+            <ActivityIndicator
+              size="large"
+              color="#8687E7"
+            />
+          </View>
+        ) : (
+          <>
+            {filteredTask.length <= 0 && (
+              <>
+                <Image
+                  source={require('../../assets/images/noTasks.png')}
+                />
+                <View
+                  style={{ alignItems: 'center', justifyContent: 'center', gap: 10 }}
+                >
+                  <Text color='#FFFFFF' weight='700' size={18}>
+                    What do you want to do today?
+                  </Text>
+                  <Text color='#FFFFFF'>
+                    Tap + to add your tasks
+                  </Text>
+                </View>
+              </>
+            )}
 
-        <ButtonTaskHeader>
-          <Text
-            color="#FFFFFF"
-            size={14}
-            weight='400'
-          >
-            Completed
-          </Text>
-          <Image
-            source={require('../../assets/icons/arrowDownIcon.png')}
-          />
-        </ButtonTaskHeader>
+            {filteredTask.length > 0 && (
+              <>
+                <ButtonTaskHeader>
+                  <Text color="#FFFFFF"size={14}weight='400'>
+                    {filteredTask.length} - Today
+                  </Text>
+                  <Image
+                    source={require('../../assets/icons/arrowDownIcon.png')}
+                  />
+                </ButtonTaskHeader>
+
+                <FlatList
+                  ItemSeparatorComponent={() => <Separator/>}
+                  contentContainerStyle={{ paddingVertical: 5 }}
+                  style={{ marginVertical: 10 }}
+                  showsVerticalScrollIndicator={false}
+                  data={filteredTask}
+                  keyExtractor={task => task.title}
+                  renderItem={({ item: task }) => (
+                    <TaskCard>
+                      <ButtonTaskComplete
+                        isCompleted={task.isCompleted}
+                      />
+
+                      <TaskCardInfo>
+                        <Text
+                          color="#FFFFFF"
+                        >
+                          {task.title}
+                        </Text>
+
+                        <TaskDetailsContainer>
+                          <TaskCategoryCard>
+                            <Image
+                              style={{ height: 20, width: 20 }}
+                              resizeMode='contain'
+                              source={require('../../assets/icons/universityIcon.png')}
+                            />
+
+                            <Text color="#FFFFFF">
+                              {task.category}
+                            </Text>
+                          </TaskCategoryCard>
+
+                          <TaskDificultCard>
+                            <Image
+                              style={{ height: 20, width: 20 }}
+                              resizeMode='contain'
+                              source={require('../../assets/icons/dificultIcon.png')}
+                            />
+
+                            <Text color="#FFFFFF">
+                              {task.dificult}
+                            </Text>
+                          </TaskDificultCard>
+                        </TaskDetailsContainer>
+                      </TaskCardInfo>
+                    </TaskCard>
+                  )}
+                />
+
+                <ButtonTaskHeader>
+                  <Text color="#FFFFFF" size={14} weight='400' >
+                    {tasks.length} - Completed
+                  </Text>
+                  <Image
+                    source={require('../../assets/icons/arrowDownIcon.png')}
+                  />
+                </ButtonTaskHeader>
+
+                <FlatList
+                  ItemSeparatorComponent={() => <Separator/>}
+                  contentContainerStyle={{ paddingVertical: 5 }}
+                  style={{ marginVertical: 10, maxHeight: 170 }}
+                  showsVerticalScrollIndicator={false}
+                  data={tasks}
+                  keyExtractor={task => task.title}
+                  renderItem={({ item: task }) => (
+                    <TaskCard>
+                      <ButtonTaskComplete
+                        isCompleted={task.isCompleted}
+                      />
+
+                      <TaskCardInfo>
+                        <Text
+                          color="#FFFFFF"
+                        >
+                          {task.title}
+                        </Text>
+
+                        <TaskDetailsContainer>
+                          <TaskCategoryCard>
+                            <Image
+                              style={{ height: 20, width: 20 }}
+                              resizeMode='contain'
+                              source={require('../../assets/icons/universityIcon.png')}
+                            />
+
+                            <Text color="#FFFFFF">
+                              {task.category}
+                            </Text>
+                          </TaskCategoryCard>
+
+                          <TaskDificultCard>
+                            <Image
+                              style={{ height: 20, width: 20 }}
+                              resizeMode='contain'
+                              source={require('../../assets/icons/dificultIcon.png')}
+                            />
+
+                            <Text color="#FFFFFF">
+                              {task.dificult}
+                            </Text>
+                          </TaskDificultCard>
+                        </TaskDetailsContainer>
+                      </TaskCardInfo>
+                    </TaskCard>
+                  )}
+                />
+              </>
+            )}
+          </>
+        )}
       </TasksContainer>
 
       <Footer />
