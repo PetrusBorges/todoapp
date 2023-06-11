@@ -61,7 +61,7 @@ const LoginScreen = () => {
         setLoginFail(false);
       }, 3000);
     }
-  }, [email, password]);
+  }, [email, password, signIn]);
 
   return (
     <Container>
