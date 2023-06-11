@@ -38,7 +38,7 @@ export const ButtonTaskComplete = styled.TouchableOpacity<ButtonTaskCompleteProp
   height: 24px;
   border-radius: 50px;
   border: 1.5px solid rgba(255, 255, 255, 0.87);
-  background-color: ${({ isCompleted }) => isCompleted ? 'rgba(255, 255, 255, 0.87)' : 'transparent'};
+  background-color: ${({ isCompleted }) => isCompleted ? '#0BB07B' : 'transparent'};
 `;
 
 export const TaskCardInfo = styled.View`

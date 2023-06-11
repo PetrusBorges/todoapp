@@ -1,6 +1,7 @@
-import { FC } from 'react';
+import { FC, useState, useCallback } from 'react';
 
 import { Text } from '../../components/Text';
+import { EditTaskModal } from '../EditTaskModal';
 import {
   Container,
   ButtonTaskComplete,
@@ -15,6 +16,7 @@ import { Task } from '../../@types/Task';
 
 interface TaskCardProps {
   task: Task;
+  fetchTasks: () => void;
 }
 
 const getCategoryImage = (categoryName: string) => {
@@ -43,13 +45,31 @@ const getCategoryImage = (categoryName: string) => {
 };
 
 export const TaskCard: FC<TaskCardProps> = ({
-  task
+  task,
+  fetchTasks
 }) => {
+  const [editTaskModalVisible, setEditTaskModalVisible] = useState<boolean>(false);
+  const [seletectedTask, setSeletectedTask] = useState<Task | null>(null);
+
   const categoryImage = getCategoryImage(task.categoryValue);
+
+  const seletecTedTask = useCallback((task: Task) => {
+    setEditTaskModalVisible(true);
+    setSeletectedTask(task);
+  }, []);
 
   return (
     <>
-      <Container>
+      <EditTaskModal
+        visible={editTaskModalVisible}
+        task={seletectedTask}
+        onClose={() => setEditTaskModalVisible(false)}
+        fetchTasks={fetchTasks}
+      />
+
+      <Container
+        onPress={() => seletecTedTask(task)}
+      >
         <ButtonTaskComplete
           isCompleted={task.isCompleted}
           onPress={() => alert('Task Complete')}
