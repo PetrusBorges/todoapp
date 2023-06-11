@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { FC, useState, useCallback } from 'react';
 
 import { CreateTaskModal } from '../CreateTaskModal';
 import { Text } from '../Text';
@@ -9,7 +9,13 @@ import {
   AddButton
 } from './styles';
 
-export const Footer = () => {
+interface FooterProps {
+  fetchTasks: () => void;
+}
+
+export const Footer: FC<FooterProps> = ({
+  fetchTasks
+}) => {
   const [createTaskModalVisible, setCreateTaskModalVisible] = useState<boolean>(false);
   const [homeSelected, setHomeSelected] = useState<boolean>(false);
   const [profileSelected, setProfileSelected] = useState<boolean>(false);
@@ -25,6 +31,7 @@ export const Footer = () => {
   return (
     <>
       <CreateTaskModal
+        fetchTasks={fetchTasks}
         visible={createTaskModalVisible}
         onClose={() => setCreateTaskModalVisible(false)}
       />
