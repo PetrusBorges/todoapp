@@ -4,6 +4,8 @@ import { api } from '../../services/api';
 
 import { Text } from '../Text';
 import { Input } from '../Input';
+import { CategoryCard } from '../CategoryCard';
+import { DificultCard } from '../DificultCard';
 import { Modal, Platform, ActivityIndicator, FlatList } from 'react-native';
 import {
   Overlay,
@@ -13,8 +15,6 @@ import {
   Image,
   DetailsTask,
   AlignDetails,
-  CategoryCard,
-  DificultCard,
   Separator
 } from './styles';
 
@@ -57,31 +57,6 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
 
     setDificultView((prevState) => !prevState);
   }, [categoryView]);
-
-  const getCategoryImage = (categoryName: string) => {
-    switch (categoryName) {
-    case 'Grocery':
-      return require('../../assets/icons/category/breadIcon.png');
-    case 'Work':
-      return require('../../assets/icons/category/briefcaseIcon.png');
-    case 'Design':
-      return require('../../assets/icons/category/designIcon.png');
-    case 'Health':
-      return require('../../assets/icons/category/heartbeatIcon.png');
-    case 'Home':
-      return require('../../assets/icons/category/homeIcon.png');
-    case 'Social':
-      return require('../../assets/icons/category/megaphoneIcon.png');
-    case 'Music':
-      return require('../../assets/icons/category/musicIcon.png');
-    case 'Sport':
-      return require('../../assets/icons/category/sportIcon.png');
-    case 'Study':
-      return require('../../assets/icons/category/universityIcon.png');
-    case 'Movie':
-      return require('../../assets/icons/category/videoCameraIcon.png');
-    }
-  };
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -139,7 +114,11 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
       >
         <ModalBody>
           <Header>
-            <Text color='#FFFFFF'>Add Task</Text>
+            <Text color='#FFFFFF'>
+              {!categoryView && !dificultView && 'Add Task'}
+              {categoryView && 'Add Category'}
+              {dificultView && 'Add Dificult'}
+            </Text>
 
             <Button
               onPress={onClose}
@@ -169,14 +148,9 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
               keyExtractor={category => category._id}
               renderItem={({ item: category }) => (
                 <CategoryCard
-                  backgroundColor={category.name}
+                  category={category}
                   onPress={() => setCategoryValue(category._id)}
-                >
-                  <Image
-                    source={getCategoryImage(category.name)}
-                  />
-                  <Text color='#010101'>{category.name}</Text>
-                </CategoryCard>
+                />
               )}
             />
           )}
@@ -191,13 +165,9 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
               keyExtractor={dificult => dificult._id}
               renderItem={({ item: dificult }) => (
                 <DificultCard
+                  dificult={dificult}
                   onPress={() => setDificultValue(dificult._id)}
-                >
-                  <Image
-                    source={require('../../assets/icons/dificultIcon.png')}
-                  />
-                  <Text color="#FFFFFF">{dificult.value}</Text>
-                </DificultCard>
+                />
               )}
             />
           )}

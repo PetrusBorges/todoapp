@@ -4,23 +4,6 @@ interface ButtonProps {
   disabled: boolean;
 }
 
-interface CategoryCardProps {
-  backgroundColor: keyof typeof categoryColors;
-}
-
-const categoryColors = {
-  Grocery: '#CCFF80',
-  Work: '#FF9680',
-  Design: '#80FFFF',
-  Health: '#80FFA3',
-  Home: '#FF8080',
-  Social: '#FF80EB',
-  Music: '#FC80FF',
-  Sport: '#80FFFF',
-  Study: '#809CFF',
-  Movie: '#80D1FF',
-};
-
 export const Overlay = styled.KeyboardAvoidingView`
   background-color: rgba(0, 0, 0, 0.6);
   flex: 1;
@@ -61,27 +44,6 @@ export const AlignDetails = styled.View`
   align-items: center;
   justify-content: center;
   gap: 16px;
-`;
-
-export const CategoryCard = styled.TouchableOpacity<CategoryCardProps>`
-  width: 95px;
-  height: 95px;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  border-radius: 4px;
-  background-color: ${({ backgroundColor }) => categoryColors[backgroundColor] || '#000000'}
-`;
-
-export const DificultCard = styled.TouchableOpacity`
-  width: 95px;
-  height: 95px;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  border-radius: 4px;
-  gap: 5px;
-  background-color: #272727;
 `;
 
 export const Separator = styled.View`
