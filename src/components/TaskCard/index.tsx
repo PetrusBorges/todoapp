@@ -45,7 +45,7 @@ const getCategoryImage = (categoryName: string) => {
 export const TaskCard: FC<TaskCardProps> = ({
   task
 }) => {
-  const categoryImage = getCategoryImage(task.category);
+  const categoryImage = getCategoryImage(task.categoryValue);
 
   return (
     <>
@@ -58,12 +58,12 @@ export const TaskCard: FC<TaskCardProps> = ({
           <Text
             color="#FFFFFF"
           >
-            {task.title}
+            {task.taskTitle}
           </Text>
 
           <TaskDetailsContainer>
             <TaskCategoryCard
-              category={task.category}
+              category={task.categoryValue}
             >
               <Image
                 style={{ height: 25, width: 25 }}
@@ -72,7 +72,7 @@ export const TaskCard: FC<TaskCardProps> = ({
               />
 
               <Text color="#FFFFFF">
-                {task.category}
+                {task.categoryValue}
               </Text>
             </TaskCategoryCard>
 
@@ -82,7 +82,7 @@ export const TaskCard: FC<TaskCardProps> = ({
               />
 
               <Text color="#FFFFFF">
-                {task.dificult}
+                {task.dificultValue}
               </Text>
             </TaskDificultCard>
           </TaskDetailsContainer>
