@@ -33,9 +33,9 @@ export const Container = styled.TouchableOpacity`
   padding: 0px 40px;
 `;
 
-export const ButtonTaskComplete = styled.View<ButtonTaskCompleteProps>`
-  width: 18px;
-  height: 18px;
+export const ButtonTaskComplete = styled.TouchableOpacity<ButtonTaskCompleteProps>`
+  width: 24px;
+  height: 24px;
   border-radius: 50px;
   border: 1.5px solid rgba(255, 255, 255, 0.87);
   background-color: ${({ isCompleted }) => isCompleted ? 'rgba(255, 255, 255, 0.87)' : 'transparent'};

@@ -52,6 +52,7 @@ export const TaskCard: FC<TaskCardProps> = ({
       <Container>
         <ButtonTaskComplete
           isCompleted={task.isCompleted}
+          onPress={() => alert('Task Complete')}
         />
 
         <TaskCardInfo>
