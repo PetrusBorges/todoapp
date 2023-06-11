@@ -67,7 +67,7 @@ const RegisterScreen = () => {
         setRegisterFail(false);
       }, 3000);
     }
-  }, [email, password, confirmPassword]);
+  }, [email, password, confirmPassword, navigation]);
 
   return (
     <Container>
