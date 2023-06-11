@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import { api } from '../../services/api';
 
 import { TaskCard } from '../../components/TaskCard';
 import { Text } from '../../components/Text';
@@ -21,57 +22,40 @@ import { Task } from '../../@types/Task';
 
 const HomeScreen = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      isCompleted: false,
-      title: 'aaaaaa',
-      category: 'Study',
-      dificult: 1
-    },
-    {
-      isCompleted: true,
-      title: 'bbbbbbb',
-      category: 'Home',
-      dificult: 2
-    },
-    {
-      isCompleted: true,
-      title: 'asdasd',
-      category: 'Home',
-      dificult: 2
-    },
-    {
-      isCompleted: true,
-      title: 'ssdsdsd',
-      category: 'Home',
-      dificult: 2
-    },
-    {
-      isCompleted: true,
-      title: 'xcxcxcx',
-      category: 'Home',
-      dificult: 2
-    },
-    {
-      isCompleted: true,
-      title: 'xxcxcxxxcxcxcx',
-      category: 'Home',
-      dificult: 2
-    }
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [searchTask, setSearchTask] = useState<string>('');
 
   const { user, logout } = useAuth();
 
+  const filteredTask = useMemo(() => {
+    return tasks.filter((task) => (
+      task.taskTitle.toLowerCase().includes(searchTask.toLowerCase())
+    ));
+  }, [tasks, searchTask]);
+
+  const fetchTasks = useCallback( async () => {
+    try {
+      setIsLoading(true);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const response = await api.get(`/users/${user?._id}`);
+
+      setTasks(response.data.tasks);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
+
   if (!user) {
     return null;
   }
-
-  const filteredTask = useMemo(() => {
-    return tasks.filter((task) => (
-      task.title.toLowerCase().includes(searchTask.toLowerCase())
-    ));
-  }, [tasks, searchTask]);
 
   return (
     <Container
@@ -156,7 +140,7 @@ const HomeScreen = () => {
                   style={{ marginVertical: 10 }}
                   showsVerticalScrollIndicator={false}
                   data={filteredTask}
-                  keyExtractor={task => task.title}
+                  keyExtractor={task => task._id}
                   renderItem={({ item: task }) => (
                     <TaskCard
                       task={task}
@@ -169,7 +153,9 @@ const HomeScreen = () => {
         )}
       </TasksContainer>
 
-      <Footer />
+      <Footer
+        fetchTasks={fetchTasks}
+      />
     </Container>
   );
 };
