@@ -144,6 +144,7 @@ const HomeScreen = () => {
                   renderItem={({ item: task }) => (
                     <TaskCard
                       task={task}
+                      fetchTasks={fetchTasks}
                     />
                   )}
                 />
