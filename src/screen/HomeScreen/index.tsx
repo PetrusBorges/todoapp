@@ -137,7 +137,7 @@ const HomeScreen = () => {
                 <FlatList
                   ItemSeparatorComponent={() => <Separator/>}
                   contentContainerStyle={{ paddingVertical: 5 }}
-                  style={{ marginVertical: 10 }}
+                  style={{ marginVertical: 5 }}
                   showsVerticalScrollIndicator={false}
                   data={filteredTask}
                   keyExtractor={task => task._id}
