@@ -5,16 +5,7 @@ interface ButtonProps {
 }
 
 interface CategoryCardProps {
-  Grocery: boolean;
-  Work: boolean;
-  Design: boolean;
-  Health: boolean;
-  Home: boolean;
-  Social: boolean;
-  Music: boolean;
-  Sport: boolean;
-  Study: boolean;
-  Movie: boolean;
+  backgroundColor: keyof typeof categoryColors;
 }
 
 const categoryColors = {
@@ -72,15 +63,6 @@ export const AlignDetails = styled.View`
   gap: 16px;
 `;
 
-export const CategoryContainer = styled.View`
-  width: 100%;
-  gap: 10px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const CategoryCard = styled.TouchableOpacity<CategoryCardProps>`
   width: 95px;
   height: 95px;
@@ -88,39 +70,7 @@ export const CategoryCard = styled.TouchableOpacity<CategoryCardProps>`
   justify-content: center;
   padding: 16px;
   border-radius: 4px;
-  background-color: ${({
-    Grocery,
-    Work,
-    Design,
-    Health,
-    Home,
-    Social,
-    Music,
-    Sport,
-    Study,
-    Movie,
-  }) => {
-    if (Grocery) return categoryColors.Grocery;
-    if (Work) return categoryColors.Work;
-    if (Design) return categoryColors.Design;
-    if (Health) return categoryColors.Health;
-    if (Home) return categoryColors.Home;
-    if (Social) return categoryColors.Social;
-    if (Music) return categoryColors.Music;
-    if (Sport) return categoryColors.Sport;
-    if (Study) return categoryColors.Study;
-    if (Movie) return categoryColors.Movie;
-    return '#000000';
-  }};
-`;
-
-export const DificultContainer = styled.View`
-  width: 100%;
-  gap: 10px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  background-color: ${({ backgroundColor }) => categoryColors[backgroundColor] || '#000000'}
 `;
 
 export const DificultCard = styled.TouchableOpacity`
@@ -132,4 +82,12 @@ export const DificultCard = styled.TouchableOpacity`
   border-radius: 4px;
   gap: 5px;
   background-color: #272727;
+`;
+
+export const Separator = styled.View`
+  width: 1.5px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.87);
+  opacity: 0.2;
+  margin: 0px 14px;
 `;
