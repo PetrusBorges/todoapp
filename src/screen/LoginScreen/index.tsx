@@ -1,9 +1,9 @@
 import { useState, useMemo, useCallback } from 'react';
+import useAuth from '../../hooks/useAuth';
+
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../main/Main';
-
-import useAuth from '../../hooks/useAuth';
 
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
