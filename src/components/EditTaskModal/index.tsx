@@ -28,13 +28,15 @@ interface EditTaskModalProps {
   visible: boolean;
   onClose: () => void;
   fetchTasks: () => void;
+  submitCompleteTask: (task: Task) => void,
 }
 
 export const EditTaskModal: FC<EditTaskModalProps> = ({
   task,
   visible,
   onClose,
-  fetchTasks
+  fetchTasks,
+  submitCompleteTask
 }) => {
   const [category, setCategory] = useState<Category[]>([]);
   const [inputView, setInputView] = useState<boolean>(false);
@@ -183,6 +185,7 @@ export const EditTaskModal: FC<EditTaskModalProps> = ({
             <AlignTitleContainer>
               <ButtonTaskComplete
                 isCompleted={task.isCompleted}
+                onPress={() => submitCompleteTask(task)}
               />
 
               <Text color='#FFFFFF' weight='700' style={{ left: 10 }}>
