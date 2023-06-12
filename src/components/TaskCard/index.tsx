@@ -1,6 +1,7 @@
 import { FC, useState, useCallback } from 'react';
 import { api } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
+import { useGetCategoryImage } from '../../hooks/useGetCategoryImage';
 
 import { Text } from '../../components/Text';
 import { EditTaskModal } from '../EditTaskModal';
@@ -21,31 +22,6 @@ interface TaskCardProps {
   fetchTasks: () => void;
 }
 
-const getCategoryImage = (categoryName: string) => {
-  switch (categoryName) {
-  case 'Grocery':
-    return require('../../assets/icons/category/breadIcon.png');
-  case 'Work':
-    return require('../../assets/icons/category/briefcaseIcon.png');
-  case 'Design':
-    return require('../../assets/icons/category/designIcon.png');
-  case 'Health':
-    return require('../../assets/icons/category/heartbeatIcon.png');
-  case 'Home':
-    return require('../../assets/icons/category/homeIcon.png');
-  case 'Social':
-    return require('../../assets/icons/category/megaphoneIcon.png');
-  case 'Music':
-    return require('../../assets/icons/category/musicIcon.png');
-  case 'Sport':
-    return require('../../assets/icons/category/sportIcon.png');
-  case 'Study':
-    return require('../../assets/icons/category/universityIcon.png');
-  case 'Movie':
-    return require('../../assets/icons/category/videoCameraIcon.png');
-  }
-};
-
 export const TaskCard: FC<TaskCardProps> = ({
   task,
   fetchTasks
@@ -54,8 +30,7 @@ export const TaskCard: FC<TaskCardProps> = ({
   const [seletectedTask, setSeletectedTask] = useState<Task | null>(null);
 
   const { user } = useAuth();
-
-  const categoryImage = getCategoryImage(task.categoryValue);
+  const { getCategoryImage } = useGetCategoryImage();
 
   const seletectTask = useCallback((task: Task) => {
     setEditTaskModalVisible(true);
@@ -116,7 +91,7 @@ export const TaskCard: FC<TaskCardProps> = ({
               <Image
                 style={{ height: 25, width: 25 }}
                 resizeMode='contain'
-                source={categoryImage}
+                source={getCategoryImage(task.categoryValue)}
               />
 
               <Text color="#FFFFFF">
