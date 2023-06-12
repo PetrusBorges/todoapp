@@ -1,9 +1,9 @@
 import { useMemo, useState, useCallback } from 'react';
+import { api } from '../../services/api';
+
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../main/Main';
-
-import { api } from '../../services/api';
 
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
