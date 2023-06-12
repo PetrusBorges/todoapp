@@ -22,7 +22,7 @@ import { Category } from '../../@types/Category';
 import dificultMock from '../../mock/dificultMock';
 
 interface CreateTaskModalProps {
-  fetchTasks: () => void;
+  fetchTasks?: () => void;
   visible: boolean;
   onClose: () => void;
 }
@@ -85,7 +85,7 @@ export const CreateTaskModal: FC<CreateTaskModalProps> = ({
 
       await api.post(`/users/${user?._id}/task`, credentials);
 
-      fetchTasks();
+      fetchTasks?.();
       onClose();
     } catch (error) {
       console.log(error);
