@@ -4,6 +4,7 @@ import { RootStackParamList } from '../main/Main';
 
 import HomeScreen from '../screen/HomeScreen';
 import ResetPasswordScreen from '../screen/ResetPasswordScreen';
+import ProfileScreen from '../screen/ProfileScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -20,6 +21,10 @@ const AuthenticatedStack = () => {
       <Stack.Screen
         name='ResetPasswordScreen'
         component={ResetPasswordScreen}
+      />
+      <Stack.Screen
+        name='ProfileScreen'
+        component={ProfileScreen}
       />
     </Stack.Navigator>
   );
