@@ -25,7 +25,7 @@ const HomeScreen = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [searchTask, setSearchTask] = useState<string>('');
 
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   const filteredTask = useMemo(() => {
     return tasks.filter((task) => (
