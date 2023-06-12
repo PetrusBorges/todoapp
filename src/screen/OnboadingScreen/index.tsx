@@ -1,7 +1,8 @@
+import Swiper from 'react-native-swiper';
+
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../main/Main';
-import Swiper from 'react-native-swiper';
 
 import { StyleSheet } from 'react-native';
 import { Button } from '../../components/Button';
