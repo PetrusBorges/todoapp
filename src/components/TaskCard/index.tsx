@@ -1,4 +1,6 @@
 import { FC, useState, useCallback } from 'react';
+import { api } from '../../services/api';
+import useAuth from '../../hooks/useAuth';
 
 import { Text } from '../../components/Text';
 import { EditTaskModal } from '../EditTaskModal';
@@ -51,12 +53,36 @@ export const TaskCard: FC<TaskCardProps> = ({
   const [editTaskModalVisible, setEditTaskModalVisible] = useState<boolean>(false);
   const [seletectedTask, setSeletectedTask] = useState<Task | null>(null);
 
+  const { user } = useAuth();
+
   const categoryImage = getCategoryImage(task.categoryValue);
 
-  const seletecTedTask = useCallback((task: Task) => {
+  const seletectTask = useCallback((task: Task) => {
     setEditTaskModalVisible(true);
     setSeletectedTask(task);
   }, []);
+
+  const submitCompleteTask = useCallback( async (task: Task) => {
+    try {
+      let credentials;
+
+      if (task.isCompleted) {
+        credentials = {
+          isCompleted: false
+        };
+      } else {
+        credentials = {
+          isCompleted: true
+        };
+      }
+
+      await api.put(`/users/${user?._id}/task/${task._id}/done`, credentials);
+
+      fetchTasks();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user, fetchTasks]);
 
   return (
     <>
@@ -65,14 +91,15 @@ export const TaskCard: FC<TaskCardProps> = ({
         task={seletectedTask}
         onClose={() => setEditTaskModalVisible(false)}
         fetchTasks={fetchTasks}
+        submitCompleteTask={submitCompleteTask}
       />
 
       <Container
-        onPress={() => seletecTedTask(task)}
+        onPress={() => seletectTask(task)}
       >
         <ButtonTaskComplete
           isCompleted={task.isCompleted}
-          onPress={() => alert('Task Complete')}
+          onPress={() => submitCompleteTask(task)}
         />
 
         <TaskCardInfo>
