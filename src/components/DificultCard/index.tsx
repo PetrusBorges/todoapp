@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { Dificult } from '../../@types/Dificult';
-
 import { Text } from '../Text';
 import { Container, Image } from './styles';
+
+import { Dificult } from '../../@types/Dificult';
 
 interface DificultCardProps {
   dificult: Dificult;
