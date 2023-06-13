@@ -12,20 +12,22 @@ import {
   Image,
   AddButton
 } from './styles';
+import { Task } from '../../@types/Task';
 
 interface FooterProps {
   fetchTasks?: () => void;
+  tasks?: Task[];
 }
 
 type FooterNavigationProps = StackNavigationProp<RootStackParamList>
 
 export const Footer: FC<FooterProps> = ({
-  fetchTasks
+  fetchTasks,
+  tasks
 }) => {
   const [createTaskModalVisible, setCreateTaskModalVisible] = useState<boolean>(false);
   const [homeSelected, setHomeSelected] = useState<boolean>(false);
   const [profileSelected, setProfileSelected] = useState<boolean>(false);
-
   const navigation = useNavigation<FooterNavigationProps>();
   const route = useRoute();
 
@@ -65,16 +67,18 @@ export const Footer: FC<FooterProps> = ({
           </Text>
         </ButtonFooter>
 
-        <AddButton
-          onPress={() => setCreateTaskModalVisible(true)}
-        >
-          <Image
-            source={require('../../assets/icons/addIcon.png')}
-          />
-        </AddButton>
+        {route.name === 'HomeScreen' && (
+          <AddButton
+            onPress={() => setCreateTaskModalVisible(true)}
+          >
+            <Image
+              source={require('../../assets/icons/addIcon.png')}
+            />
+          </AddButton>
+        )}
 
         <ButtonFooter
-          onPress={() => navigation.navigate('ProfileScreen')}
+          onPress={() => navigation.navigate('ProfileScreen', { tasks: tasks })}
         >
           <Image
             source={profileSelected ? require('../../assets/icons/profileIconSelected.png') : require('../../assets/icons/profileIcon.png')}
