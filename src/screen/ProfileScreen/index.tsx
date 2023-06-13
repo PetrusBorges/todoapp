@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import useAuth from '../../hooks/useAuth';
 
+import { useRoute } from '@react-navigation/native';
+
 import { Text } from '../../components/Text';
 import { Input } from '../../components/Input';
 import { Footer } from '../../components/Footer';
@@ -17,10 +19,14 @@ import {
   ButtonLoggout
 } from './styles';
 
+import { Task } from '../../@types/Task';
+
 const ProfileScreen = () => {
   const [inputEmailView, setInputEmailView] = useState<boolean>(false);
   const [inputPasswordView, setInputPasswordView] = useState<boolean>(false);
 
+  const route = useRoute();
+  const tasks = (route.params as { tasks?: Task[] })?.tasks;
   const { user, logout } = useAuth();
 
   const toggleEmailView = useCallback(() => {
@@ -35,11 +41,10 @@ const ProfileScreen = () => {
     if (inputEmailView) {
       setInputEmailView(false);
     }
-
     setInputPasswordView((prevState) => !prevState);
   }, [inputEmailView]);
 
-  if (!user) {
+  if (!user || !tasks) {
     return null;
   }
 
@@ -61,7 +66,7 @@ const ProfileScreen = () => {
 
           <TaskCountCard>
             <Text color='#FFFFFF'>
-              {user.tasks.length} Task left
+              {tasks.length} Task left
             </Text>
           </TaskCountCard>
         </HeaderProfile>
