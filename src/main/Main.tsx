@@ -4,13 +4,15 @@ import AuthProvider from '../contexts/userAuth';
 
 import Routes from '../routes';
 
+import { Task } from '../@types/Task';
+
 export type RootStackParamList = {
   OnboadingScreen: undefined;
   LoginScreen: undefined;
   RegisterScreen: undefined;
   HomeScreen: undefined;
   ResetPasswordScreen: undefined;
-  ProfileScreen: undefined;
+  ProfileScreen: { tasks?: Task[] };
 }
 
 const Main = () => {
