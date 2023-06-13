@@ -156,6 +156,7 @@ const HomeScreen = () => {
 
       <Footer
         fetchTasks={fetchTasks}
+        tasks={tasks}
       />
     </Container>
   );
