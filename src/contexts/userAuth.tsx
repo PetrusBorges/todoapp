@@ -1,6 +1,5 @@
 import { FC, createContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AxiosResponse } from 'axios';
 
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -79,23 +78,17 @@ const AuthProvider: FC<AuthProviderProps> = ({
     }
   }, [user]);
 
-  const getUserFromToken = async (): Promise<User | undefined> => {
-    try {
-      setLoading(true);
+  const getUserFromToken = async () => {
+    setLoading(true);
 
-      const response: AxiosResponse<User> = await api.get('/login/me');
-      const user = response.data;
+    const response = await api.get('/login/me');
 
-      if (user) {
-        setUser(user);
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-
-      return user;
-    } catch (error) {
-      console.log(error);
+    const user = response.data;
+    if (user) {
+      setUser(user);
+      setLoading(false);
+    } else {
+      setLoading(false);
     }
   };
 
