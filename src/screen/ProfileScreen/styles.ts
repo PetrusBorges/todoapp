@@ -58,6 +58,13 @@ export const SettingsContent = styled.TouchableOpacity`
   justify-content: space-between;
 `;
 
+export const AlignSetting = styled.View`
+  flex-direction: row;
+  width: 50%;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const SetingsAlign = styled.View`
   flex-direction: row;
   align-items: center;
@@ -67,8 +74,8 @@ export const SetingsAlign = styled.View`
 
 export const Image = styled.Image``;
 
-export const ButtonLoggout = styled.TouchableOpacity`
-  margin-top: 35px;
+export const ButtonLogout = styled.TouchableOpacity`
+  margin-top: 5px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
