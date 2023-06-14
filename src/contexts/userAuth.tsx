@@ -36,6 +36,7 @@ interface AuthContextData {
   updatePassword: (credentials: UpdatePasswordCredentials) => Promise<boolean>;
   recoveryPassword: (credentials: RecoveryPasswordCredentials) => Promise<boolean>;
   user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>
   getToken(): void;
   isAuthenticated: boolean;
   loading: boolean;
@@ -201,6 +202,7 @@ const AuthProvider: FC<AuthProviderProps> = ({
         getToken,
         getUserFromToken,
         user,
+        setUser,
         loading,
         isAuthenticated
       }}
