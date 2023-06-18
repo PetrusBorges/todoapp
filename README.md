@@ -1,11 +1,11 @@
 # TodoApp ✔
-![Cover](https://github.com/PetrusBorges/todoapp/assets/105453766/2cd6f788-668b-4555-9f81-9cc6249de4a4)
+![Cover](https://github.com/PetrusBorges/todoapp/assets/105453766/d7458826-019e-4021-afd9-98d676fcad4d)
 
 HotelBookingApp é um aplicativo composto por uma área de administração de agendamento de reservas acessada via tablet pelos administradores de um estabelecimento e uma área de seleção de hotel, apartamentos e áreas de lazer disponíveis para agendamento de temporadas direcionadas aos clientes do estabelecimento podendo ser acessada por smartphones. Aplicação feita em Node.js, React e React Native.
 
-https://github.com/PetrusBorges/todoapp/assets/105453766/8ba0d871-4e29-4a92-9ff3-ada679a3cfe5
+https://github.com/PetrusBorges/todoapp/assets/105453766/58407736-3242-4c0a-92dc-41c552893a11
 
-![Group 5305](https://github.com/PetrusBorges/todoapp/assets/105453766/7c1f1b34-a2c5-4050-80c0-645298c644d0)
+![Group 5305](https://github.com/PetrusBorges/todoapp/assets/105453766/ceaca41e-85b9-48fe-80cf-e46836233191)
 
 ## 🛠️ Feito com
 
