@@ -1,6 +1,6 @@
-![image](https://user-images.githubusercontent.com/105453766/211231054-9d531ecc-f26f-4af5-ba98-ce76edf653d4.png)
+![Cover](https://github.com/PetrusBorges/todoapp/assets/105453766/2cd6f788-668b-4555-9f81-9cc6249de4a4)
 
-https://user-images.githubusercontent.com/105453766/211231170-90acecac-3ad5-4d90-83e4-ef622cbdb67d.mp4
+https://github.com/PetrusBorges/todoapp/assets/105453766/8ba0d871-4e29-4a92-9ff3-ada679a3cfe5
 
 # HotelBookingApp 🏦
 
