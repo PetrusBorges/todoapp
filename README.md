@@ -1,7 +1,11 @@
 # TodoApp ✔
 ![Cover](https://github.com/PetrusBorges/todoapp/assets/105453766/d7458826-019e-4021-afd9-98d676fcad4d)
 
-HotelBookingApp é um aplicativo composto por uma área de administração de agendamento de reservas acessada via tablet pelos administradores de um estabelecimento e uma área de seleção de hotel, apartamentos e áreas de lazer disponíveis para agendamento de temporadas direcionadas aos clientes do estabelecimento podendo ser acessada por smartphones. Aplicação feita em Node.js, React e React Native.
+O TodoApp é um aplicativo de lista de afazeres projetado para ajudar as pessoas a organizarem e gerenciarem suas tarefas diárias. Ele oferece uma série de recursos para auxiliar na gestão das tarefas e garantir que nada seja esquecido. O aplicativo foi desenvolvido utilizando as tecnologias Node.js, React e React Native.
+
+Com o TodoApp, os usuários podem criar facilmente novas tarefas, atribuindo a elas um título descritivo e detalhes relevantes. Além disso, eles podem definir datas de vencimento para cada tarefa, permitindo que priorizem e planejem suas atividades de acordo com as necessidades e prazos.
+
+O TodoApp permite que os usuários organizem suas tarefas em diferentes categorias ou listas personalizadas. Isso ajuda na segmentação e no agrupamento das tarefas de acordo com projetos, contextos ou áreas de responsabilidade. Dessa forma, os usuários podem ter uma visão clara de suas tarefas em diferentes áreas de suas vidas, facilitando o gerenciamento eficiente.
 
 https://github.com/PetrusBorges/todoapp/assets/105453766/13a96844-cb02-4181-8ec3-f49904db5378
 
